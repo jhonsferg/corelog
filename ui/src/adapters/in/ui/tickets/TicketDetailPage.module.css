@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 720px;
+}
+
+.backButton {
+  align-self: flex-start;
+}
+
+.title {
+  margin-top: 0;
+}
+
+.statusSelect {
+  width: 200px;
+}
+
+.assigneeInput {
+  width: 320px;
+}
