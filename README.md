@@ -1,5 +1,4 @@
 # CoreLog
-
 Un minisistema para la gestión de incidentes y la resolución de tickets.
 Este proyecto se está desarrollando con fines educativos como parte del curso "Herramientas de Desarrollo" de la Universidad Tecnológica del Perú.
 
