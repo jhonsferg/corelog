@@ -342,3 +342,5 @@ SQLite has no equivalent user or permission model: `migrations/sqlite/` produces
 - `migrate: command not found`: install [golang-migrate](https://github.com/golang-migrate/migrate#installation). It is required only for the PostgreSQL path, not for SQLite.
 - CORS errors in the browser: make sure `CORS_ALLOWED_ORIGIN` matches the exact origin the frontend runs on, whose default is `http://localhost:5173`.
 - `401 Unauthorized` on `/tickets`: the ticket and `/users/me` endpoints require `Authorization: Bearer <token>` from `POST /auth/login`.
+
+- Módulo de autenticación (registro e inicio de sesión) probado y funcional.
