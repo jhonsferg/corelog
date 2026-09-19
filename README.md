@@ -1,7 +1,6 @@
 # CoreLog
-
-A mini system for incident management and ticket resolution.
-This project is being developed for educational purposes as part of the "Development Tools" course at the Technological University of Peru.
+Un minisistema para la gestión de incidentes y la resolución de tickets.
+Este proyecto se está desarrollando con fines educativos como parte del curso "Herramientas de Desarrollo" de la Universidad Tecnológica del Perú.
 
 ## Table of contents
 
