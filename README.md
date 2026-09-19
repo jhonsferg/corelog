@@ -88,7 +88,7 @@ There is no dedicated admin bootstrap step: the very first account ever register
 
 See [`ui/README.md`](ui/README.md) for the frontend's hexagonal layout. Stack: React plus TypeScript and Vite, React Router, Zustand, Axios, React Hook Form plus Zod, Ant Design, CSS Modules.
 
-## Prerequisites
+## Prerequisitos de trabajo
 
 - Go 1.27 or newer
 - Node.js 24 or newer, and npm
