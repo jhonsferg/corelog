@@ -343,4 +343,4 @@ SQLite has no equivalent user or permission model: `migrations/sqlite/` produces
 - CORS errors in the browser: make sure `CORS_ALLOWED_ORIGIN` matches the exact origin the frontend runs on, whose default is `http://localhost:5173`.
 - `401 Unauthorized` on `/tickets`: the ticket and `/users/me` endpoints require `Authorization: Bearer <token>` from `POST /auth/login`.
 
-- Despliegue verificado con Docker Compose y variables de entorno documentadas.git add README.md
+- Despliegue verificado con Docker Compose y variables de entorno documentadas.
