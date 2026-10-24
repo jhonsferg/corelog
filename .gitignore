@@ -1,36 +1,126 @@
+# =====================================================================
+# Corelog — repository-wide ignore rules
+# Organised by toolchain. Keep this file sorted by section, not by age.
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# Go
+# ---------------------------------------------------------------------
+
+# Build output: the default binary name, /bin/ and shared-library formats
+/corelog
 /bin/
-/tmp/
-/corelog-package.tar.gz
-/corelog-package.zip
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
+
+# Test binaries and compiler output
 *.test
 *.out
-corelog
+*.cov
+*.cover
+
+# Coverage reports
+coverage.out
+coverage.html
+coverage/
+htmlcov/
+
+# Runtime and profiling artifacts
+*.prof
+*.pprof
+*.trace
+__debug_bin*
+debug
+
+# Go workspace files (the module is defined by go.mod, not go.work)
+go.work
+go.work.sum
+
+# Scratch directory
+/tmp/
+
+# ---------------------------------------------------------------------
+# Local data stores
+# ---------------------------------------------------------------------
 /data/
 *.db
 *.db-journal
 *.db-shm
 *.db-wal
+*.sqlite
+*.sqlite3
+*.sqlite-journal
 
+# ---------------------------------------------------------------------
+# Secrets and machine-local configuration
+# Never commit real values; .env.example stays tracked as the template.
+# ---------------------------------------------------------------------
 .env
 .env.*
 !.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+secrets/
+credentials.json
 
+# ---------------------------------------------------------------------
+# Node.js, npm and Vite (see ui/.gitignore for the frontend-specific set)
+# ---------------------------------------------------------------------
 node_modules/
+.pnpm-store/
+.yarn/
+.pnp.*
+
+# Build output
 dist/
 dist-ssr/
+.vite/
+.next/
+.nuxt/
 
+# Caches
+.cache/
+.eslintcache
+.stylelintcache
+.npm/
+*.tsbuildinfo
+
+# Package manager logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ---------------------------------------------------------------------
+# Logs
+# ---------------------------------------------------------------------
+*.log
+logs/
+
+# ---------------------------------------------------------------------
+# Editors and operating systems
+# ---------------------------------------------------------------------
 .vscode/*
 !.vscode/extensions.json
 .idea/
+*.swp
+*.swo
+*~
+*.sublime-*
 .DS_Store
 Thumbs.db
-*.swp
+desktop.ini
 
-*.log
-
+# ---------------------------------------------------------------------
+# Packaging and Docker overrides
+# ---------------------------------------------------------------------
+/corelog-package.tar.gz
+/corelog-package.zip
 docker/**/*.local.yml
+docker-compose.local.yml
