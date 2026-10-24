@@ -22,7 +22,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-17-4169E1?style=for-the-badge&logo=postgresql&logoColor=white">
   <img alt="Docker" src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
   <img alt="Docker Compose" src="https://img.shields.io/badge/Docker_Compose-v2-2496ED?style=for-the-badge&logo=docker&logoColor=white">
-  <img alt="nginx" src="https://img.shields.io/badge/nginx-1.27-009639?style=for-the-badge&logo=nginx&logoColor=white">
+  <img alt="nginx" src="https://img.shields.io/badge/nginx-1.30-009639?style=for-the-badge&logo=nginx&logoColor=white">
   <img alt="golang-migrate" src="https://img.shields.io/badge/golang--migrate-v4.17.1-007ec6?style=for-the-badge">
   <img alt="Node.js" src="https://img.shields.io/badge/Node.js-24-5FA04E?style=for-the-badge&logo=nodedotjs&logoColor=white">
   <img alt="npm" src="https://img.shields.io/badge/npm-11.19.0-CB3837?style=for-the-badge&logo=npm&logoColor=white">
