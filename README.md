@@ -1,4 +1,35 @@
-# CoreLog
+<h1 align="center">CoreLog</h1>
+
+<p align="center">
+  <img alt="Go" src="https://img.shields.io/badge/Go-1.27.3-00ADD8?style=for-the-badge&logo=go&logoColor=white">
+  <img alt="chi" src="https://img.shields.io/badge/chi-v5.5.0-007ec6?style=for-the-badge">
+  <img alt="sqlx" src="https://img.shields.io/badge/sqlx-v1.4.0-007ec6?style=for-the-badge">
+  <img alt="golang-jwt" src="https://img.shields.io/badge/golang--jwt-v5.3.1-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white">
+  <img alt="go-playground validator" src="https://img.shields.io/badge/go--playground_validator-v10.30.5-007ec6?style=for-the-badge">
+  <img alt="godotenv" src="https://img.shields.io/badge/godotenv-v1.5.1-007ec6?style=for-the-badge">
+  <img alt="modernc SQLite" src="https://img.shields.io/badge/modernc_SQLite-v1.61.0-003B57?style=for-the-badge&logo=sqlite&logoColor=white">
+  <img alt="React" src="https://img.shields.io/badge/React-19.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-6.0.3-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+  <img alt="Vite" src="https://img.shields.io/badge/Vite-8.3.5-646CFF?style=for-the-badge&logo=vite&logoColor=white">
+  <img alt="Ant Design" src="https://img.shields.io/badge/Ant_Design-6.6.7-0170FE?style=for-the-badge&logo=antdesign&logoColor=white">
+  <img alt="React Router" src="https://img.shields.io/badge/React_Router-7.18.4-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
+  <img alt="Zustand" src="https://img.shields.io/badge/Zustand-5.0.15-007ec6?style=for-the-badge">
+  <img alt="Axios" src="https://img.shields.io/badge/Axios-1.20.0-5A29E7?style=for-the-badge&logo=axios&logoColor=white">
+  <img alt="React Hook Form" src="https://img.shields.io/badge/React_Hook_Form-7.90.0-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white">
+  <img alt="Zod" src="https://img.shields.io/badge/Zod-4.6.7-1E40AF?style=for-the-badge&logo=zod&logoColor=white">
+  <img alt="ESLint" src="https://img.shields.io/badge/ESLint-10.13.0-4B32C3?style=for-the-badge&logo=eslint&logoColor=white">
+  <img alt="CSS Modules" src="https://img.shields.io/badge/CSS_Modules-367599?style=for-the-badge">
+  <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-17-4169E1?style=for-the-badge&logo=postgresql&logoColor=white">
+  <img alt="Docker" src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
+  <img alt="Docker Compose" src="https://img.shields.io/badge/Docker_Compose-v2-2496ED?style=for-the-badge&logo=docker&logoColor=white">
+  <img alt="nginx" src="https://img.shields.io/badge/nginx-1.27-009639?style=for-the-badge&logo=nginx&logoColor=white">
+  <img alt="golang-migrate" src="https://img.shields.io/badge/golang--migrate-v4.17.1-007ec6?style=for-the-badge">
+  <img alt="Node.js" src="https://img.shields.io/badge/Node.js-24-5FA04E?style=for-the-badge&logo=nodedotjs&logoColor=white">
+  <img alt="npm" src="https://img.shields.io/badge/npm-11.19.0-CB3837?style=for-the-badge&logo=npm&logoColor=white">
+  <img alt="GitHub Actions" src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white">
+  <img alt="OpenAPI" src="https://img.shields.io/badge/OpenAPI-3-6BA539?style=for-the-badge&logo=openapiinitiative&logoColor=white">
+</p>
+
 Un minisistema para la gestión de incidentes y la resolución de tickets.
 Este proyecto se está desarrollando con fines educativos como parte del curso "Herramientas de Desarrollo" de la Universidad Tecnológica del Perú.
 
