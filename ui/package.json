@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^6.3.4",
-    "@hookform/resolvers": "^5.9.1",
+    "@hookform/resolvers": "^6.0.0",
     "antd": "^6.6.7",
     "axios": "^1.20.0",
     "react": "^19.3.1",
