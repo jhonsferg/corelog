@@ -7,16 +7,72 @@ on:
 
 permissions:
   contents: write
+  pull-requests: read
 
 concurrency:
   group: release
   cancel-in-progress: false
 
 jobs:
-  release:
-    name: release
+  changes:
+    name: detect code changes
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true && github.event.pull_request.head.repo.full_name == github.repository
+    outputs:
+      code: ${{ steps.detect.outputs.code }}
+    steps:
+      - name: Classify changed files
+        id: detect
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+
+          skip_patterns=(
+            '*.md'
+            'docs/*'
+            '.github/*'
+            '*.gitignore'
+            '.golangci.yml'
+            '*.env.example'
+          )
+
+          changed="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files" --jq '.[].filename')"
+
+          code=false
+
+          while IFS= read -r file; do
+            if [ -z "${file}" ]; then
+              continue
+            fi
+
+            skip=false
+            for pattern in "${skip_patterns[@]}"; do
+              case "${file}" in
+                ${pattern}) skip=true; break ;;
+              esac
+            done
+
+            if [ "${skip}" = false ]; then
+              code=true
+              break
+            fi
+          done <<< "${changed}"
+
+          echo "code=${code}" >> "${GITHUB_OUTPUT}"
+
+          if [ "${code}" = true ]; then
+            echo "At least one functional file changed; a release will be created."
+          else
+            echo "Only documentation or repository metadata changed; no release."
+          fi
+
+  release:
+    name: release
+    needs: changes
+    runs-on: ubuntu-latest
+    if: needs.changes.outputs.code == 'true'
     steps:
       - name: Check out main
         uses: actions/checkout@v7
