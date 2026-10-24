@@ -4,6 +4,7 @@ Este proyecto se está desarrollando con fines educativos como parte del curso "
 
 ## Tabla de contenidos
 
+- [Integrantes y estado del proyecto](#team-and-status)
 - [Arquitectura](#architecture)
 - [Tecnologías del backend](#backend-stack)
 - [Tecnologías del frontend](#frontend-stack)
@@ -16,6 +17,23 @@ Este proyecto se está desarrollando con fines educativos como parte del curso "
 - [Docker](#docker)
 - [Convenciones del proyecto](#project-conventions)
 - [Solución de problemas](#troubleshooting)
+
+## Integrantes y estado del proyecto
+
+Grupo 11, curso Herramientas de Desarrollo (UTP).
+
+| Integrante | Rol en el equipo |
+|---|---|
+| Fernandez Gutierrez, Jhon Samuel | Responsable de repositorio |
+| Vacas Neyra, Elton Smith | Responsable funcional |
+| Navarro López, Jonathan Fabrizio | Responsable de calidad / automatización |
+| Pariachi Herrera, Dalia Sahomi | Responsable de despliegue / documentación |
+| Correa Ángeles, Daleth | Tablero de actividades y mejoras de frontend |
+
+Estado actual:
+
+* APF1 (semana 6): base del proyecto, ramas por funcionalidad, merge y conflicto resuelto en el repositorio remoto.
+* APF2 (semana 11): en curso. Pull Requests con revisión cruzada, tablero de actividades, `docker compose` completo con migraciones automáticas y una primera Release.
 
 ## Arquitectura
 
@@ -44,7 +62,7 @@ corelog/
 │   ├── postgres/                 migraciones SQL versionadas para producción, aplicadas con golang-migrate
 │   └── sqlite/                   migraciones SQL versionadas para desarrollo local, integradas en el binario y aplicadas automáticamente al iniciar
 ├── docker/                      Dockerfiles y configuración de nginx
-├── docker-compose.yml            PostgreSQL y API por defecto; agrega el perfil full para una UI en contenedor
+├── docker-compose.yaml           PostgreSQL, migraciones automáticas, API y UI con un solo comando
 ├── openapi.yaml                  Contrato AbreAPI 3 para toda la API, mantenido sincronizado con la referencia de API de abajo
 ├── scripts/                      setup.sh and setup.ps1, comandos de configuración del entorno, compilación y empaquetado
 └── ui/                           frontend React y TS, con estructura hexagonal, documentado en ui/README.md
@@ -128,15 +146,14 @@ cp .env.example .env
 
 ```
 
-Edit `.env` and set `DB_DRIVER=postgres`, luego inicia los contenedores de la base de datos y de la API y aplica las migraciones versionadas:
+Edit `.env` and set `DB_DRIVER=postgres`, luego inicia todo con un solo comando. Docker Compose levanta la base de datos, aplica las migraciones versionadas de forma automática, inicia la API y sirve el frontend:
 
 ```sh
 make docker-up
-make migrate-up
 
 ```
 
-La API ahora está escuchando en `http://localhost:8080`.
+La API queda escuchando en `http://localhost:8080` y el frontend en `http://localhost:5173`. No hace falta correr `make migrate-up` ni el paso 2.
 
 ### 2. Iniciar el frontend
 
@@ -268,19 +285,25 @@ Frontend, from `ui/package.json`, run inside `ui/`: `npm run dev`, `npm run buil
 
 ## Docker
 
-`docker-compose.yml` always starts `db`, which is PostgreSQL, and `api`. The frontend is optional and only started with the `full` profile:
+`docker-compose.yaml` levanta cuatro servicios con un solo comando:
 
 ```sh
 docker compose up -d --build
-docker compose --profile full up -d --build
 
 ```
 
-The first command starts `db` and `api`. The second additionally starts `ui`, an nginx container serving the static production build.
+| Servicio | Qué hace |
+|---|---|
+| `db` | PostgreSQL 17 con su volumen de datos |
+| `migrate` | Aplica las migraciones de `migrations/postgres/` cuando la base está lista y termina |
+| `api` | API de Go; arranca solo después de que `migrate` terminó bien |
+| `ui` | Contenedor nginx que sirve el build de producción del frontend en `http://localhost:5173` |
+
+El frontend se compila con `VITE_API_BASE_URL`, cuyo valor por defecto es `http://localhost:8080/api/v1`. Para usar otra URL, defínela en `.env` antes de construir.
 
 ### Contenedor de base de datos: usuario, base de datos y permisos
 
-The `db` service runs the official `postgres:17-alpine` image unmodified. That image creates the role, the database, and the ownership grant between them automatically, driven entirely by three environment variables set in `docker-compose.yml`:
+The `db` service runs the official `postgres:17-alpine` image unmodified. That image creates the role, the database, and the ownership grant between them automatically, driven entirely by three environment variables set in `docker-compose.yaml`:
 
 | Variable en el contenedor | Sourced from `.env` | Efecto |
 | --- | --- | --- |
@@ -299,7 +322,7 @@ docker compose up -d --build
 
 ```
 
-El nombre del volumen es el nombre del proyecto de Compose, normalmente el nombre del directorio del repositorio `corelog`, seguido de un guion bajo y del nombre del volumen declarado en `docker-compose.yml`, `corelog_db_data`. Run `docker volume ls` first to confirm the exact name on your machine, since a different directory name changes the project name prefix.
+El nombre del volumen es el nombre del proyecto de Compose, normalmente el nombre del directorio del repositorio `corelog`, seguido de un guion bajo y del nombre del volumen declarado en `docker-compose.yaml`, `corelog_db_data`. Run `docker volume ls` first to confirm the exact name on your machine, since a different directory name changes the project name prefix.
 
 ### Conectarse manualmente a la base de datos
 
@@ -356,5 +379,6 @@ SQLite no tiene un modelo equivalente de usuarios o permisos: `migrations/sqlite
 
 * `database is locked` on SQLite: only one process should hold `./data/<DB_NAME>.db` a la vez. Detén cualquier otra instancia de la API que esté ejecutándose.
 * `migrate: command not found`: install [golang-migrate](https://www.google.com/search?q=https://github.com/golang-migrate/migrate%2523installation&utm_source=gemini). Solo es necesario para la ruta de PostgreSQL, no para SQLite.
+* `relation "users" does not exist` con Docker: las migraciones no se aplicaron. Revisa `docker compose logs migrate`.
 * Errores de CORS en el navegador: asegúrate de que `CORS_ALLOWED_ORIGIN` coincida con el origen exacto en el que se ejecuta el frontend, cuyo valor predeterminado es `http://localhost:5173`.
 * `401 Unauthorized` on `/tickets`: the ticket and `/users/me` endpoints require `Authorization: Bearer <token>` from `POST /auth/login`.
