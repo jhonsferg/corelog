@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: README and setup guide
+    url: https://github.com/utp-devs/corelog/blob/main/README.md
+    about: Read the README for prerequisites, architecture, environment variables and available commands.
+  - name: OpenAPI contract
+    url: https://github.com/utp-devs/corelog/blob/main/openapi.yaml
+    about: Check the API reference before reporting what looks like an API bug.
