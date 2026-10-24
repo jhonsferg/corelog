@@ -1,8 +1,8 @@
-# Default owner: every change needs a review from the repository owner.
-* @jhonsferg
+# Default reviewers: every pull request is automatically routed to both.
+* @jhonsferg @DalethCorreaAngeles
 
 # Repository governance: workflows, templates and Dependabot configuration.
-/.github/ @jhonsferg @JhonatanNav6
+/.github/ @jhonsferg @DalethCorreaAngeles @JhonatanNav6
 
 # Backend: Go composition root, hexagonal modules and migrations.
 /cmd/ @jhonsferg @eltiton0-0
