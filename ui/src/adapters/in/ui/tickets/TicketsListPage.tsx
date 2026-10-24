@@ -1,6 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons'
-import { Button, Select, Typography } from 'antd'
-import { useState } from 'react'
+import { Button, Input, Select, Typography } from 'antd'
+import { useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import type { Ticket, TicketPriority, TicketStatus } from '@/core/tickets/domain/ticket'
@@ -28,6 +28,17 @@ export function TicketsListPage() {
   const [priorityFilter, setPriorityFilter] = useState<TicketPriority | undefined>()
 
   const { tickets, isLoading } = useTickets({ status: statusFilter, priority: priorityFilter })
+  const [search, setSearch] = useState('')
+
+  const filteredTickets = useMemo(() => {
+   const term = search.trim().toLowerCase()
+
+   if (!term) return tickets
+
+   return tickets.filter((ticket) =>
+     ticket.title.toLowerCase().includes(term)
+   )
+ }, [tickets, search])
 
   const handleSelect = (ticket: Ticket) => navigate(`/tickets/${ticket.id}`)
 
@@ -60,8 +71,19 @@ export function TicketsListPage() {
           onChange={setPriorityFilter}
         />
       </div>
+      <Input.Search
+         placeholder="Buscar ticket por título"
+         allowClear
+         value={search}
+         onChange={(e) => setSearch(e.target.value)}
+         style={{ marginBottom: 16, maxWidth: 400 }}
+      />
 
-      <TicketList tickets={tickets} isLoading={isLoading} onSelect={handleSelect} />
+      <TicketList
+         tickets={filteredTickets}
+         isLoading={isLoading}
+         onSelect={handleSelect}
+      />
 
       <Typography.Paragraph type="secondary" className={styles.hint}>
         <Link to="/tickets/new">Create the first ticket</Link> if the list above is empty.
