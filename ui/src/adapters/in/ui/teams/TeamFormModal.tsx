@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 const schema = z.object({
-  name: z.string().min(2, 'Name is too short'),
+  name: z.string().min(2, 'El nombre debe tener mínimo 2 caracteres'),
 })
 
 type FormValues = z.infer<typeof schema>
