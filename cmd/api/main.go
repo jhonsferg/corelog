@@ -56,7 +56,7 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	defer db.Close()
+	defer func() { _ = db.Close() }()
 	log.Info("connected to database", "driver", cfg.Database.Driver)
 
 	var userRepo userport.Repository
